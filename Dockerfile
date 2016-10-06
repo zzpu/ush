@@ -7,12 +7,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 
 # setup our Ubuntu sources (ADD breaks caching)
-RUN echo "deb http://us.archive.ubuntu.com/ubuntu/ precise main\n\
-deb http://us.archive.ubuntu.com/ubuntu/ precise multiverse\n\
-deb http://us.archive.ubuntu.com/ubuntu/ precise universe\n\
-deb http://us.archive.ubuntu.com/ubuntu/ precise restricted\n\
-deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main\n\
-"> /etc/apt/sources.list
+RUN echo "deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main\n\
+">> /etc/apt/sources.list
 
 #RUN echo "Acquire::http { Proxy \"http://172.17.42.1:3142\"; };\n\
 #Acquire::http::Proxy {\n\
@@ -27,9 +23,9 @@ RUN apt-mark hold initscripts udev plymouth mountall
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -fs /bin/true /sbin/initctl
 
 RUN apt-get update
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y golang
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git
+RUN apt-get -f install
+#RUN apt-get install -y golang
+RUN apt-get install -y  git 
 
 # install our "base" environment
 RUN apt-get install -y --no-install-recommends openssh-server pwgen sudo vim-tiny
