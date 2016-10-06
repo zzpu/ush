@@ -1,6 +1,10 @@
-FROM ubuntu:12.04
-MAINTAINER Doro Wu <fcwu.tw@gmail.com>
-
+FROM daocloud.io/ubuntu:14.04
+MAINTAINER Fezzpu 
+RUN rm /var/lib/apt/lists/* -vf && apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y golang
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git
+RUN mkdir -p /opt/workspace 
+ENV GOPATH /opt/workspace
 ENV DEBIAN_FRONTEND noninteractive
 
 # setup our Ubuntu sources (ADD breaks caching)
