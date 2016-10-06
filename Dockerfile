@@ -24,8 +24,9 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && ln -fs /bin/true /sbin/i
 
 RUN apt-get update
 RUN apt-get -f install
-#RUN apt-get install -y golang
+
 RUN apt-get install -y  git 
+RUN apt-get install -y golang
 
 # install our "base" environment
 RUN apt-get install -y --no-install-recommends openssh-server pwgen sudo vim-tiny
