@@ -1,12 +1,10 @@
-FROM daocloud.io/ubuntu:14.04
+FROM ubuntu:12.04
 MAINTAINER Fezzpu 
 
 RUN mkdir -p /opt/workspace 
 ENV GOPATH /opt/workspace
 ENV DEBIAN_FRONTEND noninteractive
-ADD sources.list /etc/apt/
-RUN gpg --keyserver subkeys.pgp.net --recv-keys 40976EAF437D05B5
-RUN gpg -a --export 40976EAF437D05B5 | sudo apt-key add -
+
 RUN rm /var/lib/apt/lists/* -vf && apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y golang
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git
