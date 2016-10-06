@@ -30,7 +30,8 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && ln -fs /bin/true /sbin/i
 RUN apt-get update
 
 # install our "base" environment
-RUN apt-get install -y --no-install-recommends openssh-client openssh-server sudo  vim-tiny
+RUN apt-get install -y --no-install-recommends openssh-client=1:6.6p1-2ubuntu1
+RUN apt-get install -y --no-install-recommends openssh-server sudo  vim-tiny
 
 # install tty.js
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7917B12
