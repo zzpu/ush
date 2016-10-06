@@ -5,14 +5,9 @@ RUN mkdir -p /opt/workspace
 ENV GOPATH /opt/workspace
 ENV DEBIAN_FRONTEND noninteractive
 ADD sources.list /etc/apt/
-# setup our Ubuntu sources (ADD breaks caching)
-RUN echo "deb http://ubuntu.cn99.com/ubuntu/ precise main\n\
-deb http://ubuntu.cn99.com/ubuntu/ precise multiverse\n\
-deb http://ubuntu.cn99.com/ubuntu/ precise universe\n\
-deb http://ubuntu.cn99.com/ubuntu/ precise restricted\n\
-deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu precise main\n\
-"> /etc/apt/sources.list
-#RUN rm /var/lib/apt/lists/* -vf && apt-get update
+RUN gpg --keyserver subkeys.pgp.net --recv-keys 40976EAF437D05B5
+RUN gpg -a --export 40976EAF437D05B5 | sudo apt-key add -
+RUN rm /var/lib/apt/lists/* -vf && apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y golang
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git
 
