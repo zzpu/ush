@@ -27,6 +27,8 @@ RUN apt-get -f install
 
 RUN apt-get install -y  git 
 RUN apt-get install -y golang
+RUN apt-get install -y net-tools 
+RUN apt-get install -y inetutils-ping
 
 # install our "base" environment
 RUN apt-get install -y --no-install-recommends openssh-server pwgen sudo vim-tiny
